@@ -1,13 +1,5 @@
-const { initializeApp } =  require('firebase/app');
+const {init} = require('./Library/Utils');
 const Model =  require('./Library/index');
-
-
-const init = (credentials) => {
-
-    const app = initializeApp(credentials);
-    return app;
-
-}
 
 let app = init({
     apiKey: "AIzaSyBMAgDIEuHkuyeZYBrrHJofFrIQcN12l-8",
@@ -30,12 +22,9 @@ const fetch = async() => {
             uid : ''
         } , 'user' , app);
 
-        let req_users = await user.where('username' , '==' , 'test');
+        let req_users = await user.where('username' , '==' , 'John Doe');
         req_users.first();
-        req_users.data.username = 'Test';
-        req_users.data.password = 'Test123';
-        await req_users.save();
-        console.log(req_users.data);
+        req_users.delete();
 
     }catch(err){
         console.log(err);

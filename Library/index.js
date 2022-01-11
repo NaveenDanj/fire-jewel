@@ -1,11 +1,13 @@
-const { getFirestore, 
+const { 
+    getFirestore, 
     collection, 
     getDocs, 
     addDoc,
     query,
     where,
     updateDoc,
-    doc
+    doc,
+    deleteDoc 
 } = require('firebase/firestore/lite');
 
 
@@ -66,9 +68,7 @@ class Model {
     }
 
     async delete(){
-
-        
-
+        await deleteDoc(doc(this.db, this.collection_name, this.doc_id));
     }
 
     async where(q1 , q2 , q3){
