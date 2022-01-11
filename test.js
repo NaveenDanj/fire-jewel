@@ -66,6 +66,7 @@ const createUser = async() => {
 const getUser = async() => {
 
     try{
+        //find by query
         let users = await new User().where('username' , '==' , 'Naveen Dhananjaya Hettiwaththa');
         let user = users.first();
         console.log(user);
@@ -82,5 +83,5 @@ const getUser = async() => {
 }
 
 // fetch();
-// createUser();
-getUser();
+createUser();
+// getUser();

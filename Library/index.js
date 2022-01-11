@@ -78,7 +78,10 @@ class Model {
             const docRef = await addDoc(collection(this.db, this.collection_name), data);
             this.data = data;
             this.doc_id = docRef.id;
+            this.data.id = this.doc_id;
             this.data_list = [];
+
+            await this.save();
             return this;
         }
 
