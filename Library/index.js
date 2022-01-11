@@ -1,12 +1,20 @@
-const { getFirestore, collection, getDocs } = require('firebase/firestore/lite');
+const { getFirestore, 
+    collection, 
+    getDocs, 
+    addDoc,
+    query,
+    where
+} = require('firebase/firestore/lite');
 
 
 class Model {
 
     constructor(schema , collection_name , app){
+        this.type = 'list';
         this.data = schema;
         this.db = getFirestore(app);
         this.collection_name = collection_name;
+        this.data_list = [];
     }
 
     async all(){
@@ -26,10 +34,39 @@ class Model {
                 collList.push(data);
             }
 
-        })
+        });
+
+        this.type = 'multiple';
         return collList;
 
     }
+
+    async create(data){
+
+        let data_keys = Object.keys(data);
+        let schema_keys = Object.keys(this.data);
+
+        if( !this._check(data_keys , schema_keys) ){
+            throw Error('Not in correct shape. Requeired shape is ' +  Object.keys( this.data ).toString());
+        }else{
+            const docRef = await addDoc(collection(this.db, this.collection_name), data);
+            return docRef;
+        }
+
+    }
+
+    async where(q1 , q2 , q3){
+        const q = query(collection(this.db, this.collection_name),where(q1, q2, q3));
+        const querySnapshot = await getDocs(q);
+        this.data_list = [];
+        querySnapshot.forEach((doc) => {
+            // doc.data() is never undefined for query doc snapshots
+            this.data_list.push(doc.data());
+        });
+
+        return this;
+    }
+
 
     _check(list1 , list2){
 
@@ -53,7 +90,21 @@ class Model {
 
         return true;
 
-    }  
+    }
+
+
+
+    //util functions
+    first(){
+        this.data = this.data_list[0];
+        return this.data;
+    }
+
+    last(){
+        this.data = this.data_list[ this.data_list.length-1];
+        return this.data;
+    }
+
 
 }
 

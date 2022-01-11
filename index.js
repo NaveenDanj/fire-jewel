@@ -29,8 +29,17 @@ const fetch = async() => {
             password : '',
             uid : ''
         } , 'user' , app);
+
+        await user.create({
+            username : 'John Doe',
+            password : 'johndoe123',
+            uid : 'user1'
+        });
         
-        console.log('the res is ' , await user.all());
+        
+        let req_users = await user.where('username' , '==' , 'John Doe');
+        req_users.first();
+        console.log(req_users.data.username);
 
     }catch(err){
         console.log(err);
