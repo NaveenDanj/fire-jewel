@@ -26,14 +26,14 @@ class Validator {
         let key_list =  Object.keys(data);
         let err_list = [];
         //key check
-        if( this._check( key_list , Object.keys( this.schema ) ) ){
+        if( !this._check( key_list , Object.keys( this.schema ) ) ){
             throw Error('Required fields are not present');            
         }
 
         for(let i = 0; i < key_list.length; i++){
 
             if( typeof( data[key_list[i]] ) != this.schema[key_list[i]]  ){
-                err_list.push('Type validation error. Required ' , this.schema[key_list[i]] , ' type, but got' , typeof( data[key_list[i]] ));
+                err_list.push('Type validation error. Required '  + this.schema[key_list[i]] + ' type, but got ' + typeof( data[key_list[i]] ));
             }
 
         }
@@ -75,3 +75,5 @@ class Validator {
 
 
 }
+
+module.exports = Validator;

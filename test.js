@@ -1,5 +1,6 @@
 const {init , types} = require('./Library/Utils');
 const Model =  require('./Library/index');
+const Validator = require('./Library/Validation');
 
 let app = init({
     apiKey: "AIzaSyBMAgDIEuHkuyeZYBrrHJofFrIQcN12l-8",
@@ -45,4 +46,32 @@ const fetch = async() => {
     
 }
 
-fetch();
+const createUser = async() => {
+
+    try{
+
+        let user = new User();
+
+        let user_validator = new Validator({
+            username : types.string,
+            password : types.string,
+            uid : types.string
+        })
+
+        let test_data = {
+            username : 90,
+            password : false,
+            uid : 'user1'
+        }
+
+        let res = user_validator.validate(test_data);
+        console.log('the res is ' , res);
+
+    }catch(err){
+        console.log('the error is ' , err);
+    }
+
+}
+
+// fetch();
+createUser();
