@@ -1,6 +1,8 @@
-const {init , types} = require('./Library/Utils');
-const Model =  require('./Library/index');
-const Validator = require('./Library/Validation');
+// const {init , types} = require('./Library/Utils');
+// const Model =  require('./Library/index');
+// const Validator = require('./Library/Validation');
+const {init , types , Model , Validator} = require('./index');
+
 
 let app = init({
     apiKey: "AIzaSyBMAgDIEuHkuyeZYBrrHJofFrIQcN12l-8",
