@@ -116,12 +116,14 @@ class Model {
     first(){
         this.data = this.data_list[0];
         this.doc_id = this.data.id;
+        this.data_list = [];
         return this.data;
     }
 
     last(){
         this.data = this.data_list[ this.data_list.length-1];
         this.doc_id = this.data.id;
+        this.data_list = [];
         return this.data;
     }
 

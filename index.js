@@ -11,20 +11,29 @@ let app = init({
     measurementId: "G-BFLTD0853R"
 });
 
+class User extends Model {
+
+    constructor(){
+        super({
+            username : '',
+            password : '',
+            uid : ''
+        } , 'user' , app);
+    }
+
+}
+
 
 const fetch = async() => {
 
     try{
 
-        let user = new Model({
-            username : '',
-            password : '',
-            uid : ''
-        } , 'user' , app);
+        let user = new User();
 
         let req_users = await user.where('username' , '==' , 'John Doe');
         req_users.first();
-        req_users.delete();
+        
+        console.log('the customer is ' , req_users.data);
 
     }catch(err){
         console.log(err);
