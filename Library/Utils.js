@@ -7,6 +7,12 @@ module.exports = {
         const app = initializeApp(credentials);
         return app;
     
+    },
+
+    types : {
+        number : 'number',
+        boolean : 'boolean',
+        string : 'string'
     }
 
 }

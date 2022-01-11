@@ -11,14 +11,18 @@ let app = init({
     measurementId: "G-BFLTD0853R"
 });
 
+
+//test library code
+let schema = {
+    username : '',
+    password : '',
+    uid : ''
+};
+
 class User extends Model {
 
     constructor(){
-        super({
-            username : '',
-            password : '',
-            uid : ''
-        } , 'user' , app);
+        super(schema , 'user' , app);
     }
 
 }
