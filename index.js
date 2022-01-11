@@ -17,7 +17,7 @@ let app = init({
     messagingSenderId: "64508931280",
     appId: "1:64508931280:web:adaf6b13de286dc07bc2d5",
     measurementId: "G-BFLTD0853R"
-})
+});
 
 
 const fetch = async() => {
@@ -30,16 +30,12 @@ const fetch = async() => {
             uid : ''
         } , 'user' , app);
 
-        await user.create({
-            username : 'John Doe',
-            password : 'johndoe123',
-            uid : 'user1'
-        });
-        
-        
-        let req_users = await user.where('username' , '==' , 'John Doe');
+        let req_users = await user.where('username' , '==' , 'test');
         req_users.first();
-        console.log(req_users.data.username);
+        req_users.data.username = 'Test';
+        req_users.data.password = 'Test123';
+        await req_users.save();
+        console.log(req_users.data);
 
     }catch(err){
         console.log(err);
