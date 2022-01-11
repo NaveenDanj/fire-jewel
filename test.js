@@ -1,6 +1,3 @@
-// const {init , types} = require('./Library/Utils');
-// const Model =  require('./Library/index');
-// const Validator = require('./Library/Validation');
 const {init , types , Model , Validator} = require('./index');
 
 
@@ -50,24 +47,15 @@ const fetch = async() => {
 
 const createUser = async() => {
 
+    //create new user
+
     try{
 
-        let user = new User();
-
-        let user_validator = new Validator({
-            username : types.string,
-            password : types.string,
-            uid : types.string
+        await new User().create({
+            username : 'NaveenDanj',
+            password : 'naveen123',
+            uid : 'user id 1'
         });
-
-        let test_data = {
-            username : 'test username',
-            password : 'test password',
-            uid : 'user1'
-        }
-
-        let res = user_validator.validate(test_data);
-        console.log('the res is ' , res);
 
     }catch(err){
         console.log('the error is ' , err);
@@ -75,5 +63,24 @@ const createUser = async() => {
 
 }
 
+const getUser = async() => {
+
+    try{
+        let users = await new User().where('username' , '==' , 'Naveen Dhananjaya Hettiwaththa');
+        let user = users.first();
+        console.log(user);
+
+        //find by id
+        let user2 = await new User().find('aJwQVdaih3z8zlS15GGR')
+        console.log('found user is ' , user2.data);
+
+    }catch(err){
+        console.log(err);
+    }
+
+
+}
+
 // fetch();
-createUser();
+// createUser();
+getUser();

@@ -23,6 +23,25 @@ class Model {
         this.data_list = [];
     }
 
+    async find(id){
+
+        const q = query(collection(this.db, this.collection_name),where('id' , '==' , id));
+        const querySnapshot = await getDocs(q);
+        this.data_list = [];
+        querySnapshot.forEach((doc) => {
+            // doc.data() is never undefined for query doc snapshots
+            let doc_data = doc.data();
+            doc_data.id = doc.id;
+            this.doc_id = doc.id;
+            this.data = doc_data
+
+
+        });
+
+        return this;
+
+    }
+
     async all(){
 
         const coll = collection(this.db, this.collection_name);
@@ -57,7 +76,10 @@ class Model {
             throw Error('Not in correct shape. Requeired shape is ' +  Object.keys( this.data ).toString());
         }else{
             const docRef = await addDoc(collection(this.db, this.collection_name), data);
-            return docRef;
+            this.data = data;
+            this.doc_id = docRef.id;
+            this.data_list = [];
+            return this;
         }
 
     }
@@ -115,18 +137,13 @@ class Model {
     //util functions
     first(){
         this.data = this.data_list[0];
-        this.doc_id = this.data.id;
-        this.data_list = [];
         return this.data;
     }
 
     last(){
         this.data = this.data_list[ this.data_list.length-1];
-        this.doc_id = this.data.id;
-        this.data_list = [];
         return this.data;
     }
-
 
 }
 
