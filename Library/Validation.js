@@ -41,7 +41,7 @@ class Validator {
         if(err_list.length > 0){
             return err_list;
         }else{
-            return false;
+            return true;
         }
 
 

@@ -56,11 +56,11 @@ const createUser = async() => {
             username : types.string,
             password : types.string,
             uid : types.string
-        })
+        });
 
         let test_data = {
-            username : 90,
-            password : false,
+            username : 'test username',
+            password : 'test password',
             uid : 'user1'
         }
 
