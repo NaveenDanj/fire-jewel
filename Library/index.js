@@ -65,6 +65,12 @@ class Model {
         await updateDoc(docRef, this.data);
     }
 
+    async delete(){
+
+        
+
+    }
+
     async where(q1 , q2 , q3){
         const q = query(collection(this.db, this.collection_name),where(q1, q2, q3));
         const querySnapshot = await getDocs(q);
