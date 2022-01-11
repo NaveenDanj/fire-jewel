@@ -24,7 +24,6 @@ class Validator {
     validate(data){
 
         let key_list =  Object.keys(data);
-        let val_list = Object.values(data);
         let err_list = [];
         //key check
         if( this._check( key_list , Object.keys( this.schema ) ) ){

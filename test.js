@@ -12,7 +12,6 @@ let app = init({
 });
 
 
-//test library code
 let schema = {
     username : '',
     password : '',
@@ -26,7 +25,6 @@ class User extends Model {
     }
 
 }
-
 
 const fetch = async() => {
 
