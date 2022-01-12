@@ -1,4 +1,5 @@
 const { initializeApp } =  require('firebase/app');
+import {orderBy, limit } from "firebase/firestore";  
 
 module.exports = {
 
@@ -11,6 +12,9 @@ module.exports = {
         number : 'number',
         boolean : 'boolean',
         string : 'string'
-    }
+    },
+
+    orderBy,
+    limit
 
 }
