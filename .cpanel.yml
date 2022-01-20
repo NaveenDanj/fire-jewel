@@ -1,5 +1,5 @@
 ---
 deployment:
   task:
-    -export DEPLOYPATH=/home/wonderso/fire-jewel-deploy/
+    -export DEPLOYPATH=/home/fire-jewel-deploy/
     -/bin/cp * $DEPLOYPATH
