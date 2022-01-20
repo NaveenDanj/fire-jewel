@@ -1,5 +1,5 @@
 const { initializeApp } =  require('firebase/app');
-import {orderBy, limit } from "firebase/firestore";  
+const {orderBy, limit } = require("firebase/firestore");  
 
 module.exports = {
 

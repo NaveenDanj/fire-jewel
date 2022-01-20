@@ -1,5 +1,7 @@
-const {init , types , Model , Validator} = require('./index');
+const {init , types , Model , Validator ,orderBy , limit} = require('./index');
 
+
+//this is the test file
 
 let app = init({
     apiKey: "AIzaSyBMAgDIEuHkuyeZYBrrHJofFrIQcN12l-8",
@@ -32,10 +34,9 @@ const fetch = async() => {
 
         let user = new User();
 
-        let req_users = await user.where('username' , '==' , 'John Doe');
-        req_users.first();
+        let req_users = await user.where('username' , '==' , 'John Doe' ,  limit(1));
         
-        console.log('the customer is ' , req_users.data);
+        console.log('the customer is ' , req_users);
 
     }catch(err){
         console.log(err);
@@ -52,8 +53,8 @@ const createUser = async() => {
     try{
 
         await new User().create({
-            username : 'NaveenDanj',
-            password : 'naveen123',
+            username : 'John Doe',
+            password : 'john123',
             uid : 'user id 1'
         });
 
@@ -82,6 +83,6 @@ const getUser = async() => {
 
 }
 
-// fetch();
-createUser();
+fetch();
+// createUser();
 // getUser();

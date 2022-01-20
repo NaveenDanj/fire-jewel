@@ -8,7 +8,7 @@ const {
     updateDoc,
     doc,
     deleteDoc 
-} = require('firebase/firestore/lite');
+} = require('firebase/firestore');
 
 
 class Model {
@@ -96,8 +96,16 @@ class Model {
         await deleteDoc(doc(this.db, this.collection_name, this.doc_id));
     }
 
-    async where(q1 , q2 , q3){
-        const q = query(collection(this.db, this.collection_name),where(q1, q2, q3));
+    async where(q1 , q2 , q3 , orderBy , limit){
+
+        let q = query(collection(this.db, this.collection_name),where(q1, q2, q3));
+
+        if(orderBy) q = query(collection(this.db, this.collection_name),where(q1, q2, q3) , orderBy);
+        if(limit) q = query(collection(this.db, this.collection_name),where(q1, q2, q3) , limit);
+
+        if(orderBy && limit) q = query(collection(this.db, this.collection_name),where(q1, q2, q3) , orderBy , limit);
+
+        
         const querySnapshot = await getDocs(q);
         this.data_list = [];
         querySnapshot.forEach((doc) => {
